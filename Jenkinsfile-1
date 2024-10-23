@@ -4,6 +4,16 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+    stage('Set Permissions') {
+      steps {
+        sh 'chmod +x ./mvnw'
+      }
+    }
     stage('Scan') {
       steps {
         withSonarQubeEnv(installationName: 'sq1') { 
