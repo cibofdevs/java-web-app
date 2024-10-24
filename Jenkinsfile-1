@@ -16,13 +16,13 @@ pipeline {
     }
     stage('Test Connection') {
       steps {
-        sh 'curl http://sonarqube:9001'
+        sh 'curl http://sonarqube:9000'
       }
     }
     stage('Scan') {
       steps {
         withSonarQubeEnv(installationName: 'sq1') {
-          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Dsonar.host.url=http://sonarqube:9001'
+          sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Dsonar.host.url=http://sonarqube:9000'
         }
       }
     }
